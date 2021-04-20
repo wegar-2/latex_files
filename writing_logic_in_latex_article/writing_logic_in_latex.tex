@@ -1,19 +1,24 @@
 \documentclass[12pt]{article}
 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
 \usepackage{lplfitch}
 \usepackage{amsmath}
-\usepackage{biblatex}
+\usepackage{amssymb}
+\usepackage{bussproofs}
+
 
 \begin{document}
 
-\title{Latex: Writing Logical Expressions\footnote{What I mean hear by 'expression' is any sequence of symbols in an arbitrary alphabet of choice. The word 'expression' should be considered as element of the dictionary of the spoken (verncular?) English. By the way, this explanation constitutes a situation where the distinction \textit{suppositio formalis} vs \textit{suppositio materialis} evinces itself. For more on this, cf. }}
+\title{Latex: Writing Logical Expressions\footnote{What I mean hear by 'expression' is any sequence of symbols in an arbitrary alphabet of choice. The word 'expression' should be considered as element of the dictionary of the spoken (verncular?) English. By the way, this explanation constitutes a situation where the distinction \textit{suppositio formalis} vs \textit{suppositio materialis} evinces itself. For more on this, cf. \cite{tarski_intro}, p. 59}  [WiP]}
 \author{Artur Wegrzyn}
 \date{2021-04-20}
 \maketitle
 \tableofcontents
 
 \section{Introduction}
-The purpose of this document is to investigate writing of logical expressions in Latex. I start with the simple cases (most importantly: logical connectives and quantifiers) and then proceed to more difficult ones (writing proofs in sequent calculus and Fitch-style proofs).
+The purpose of this document is to investigate writing of logical expressions in Latex. I start with the simple cases (most importantly: logical connectives and quantifiers) and then proceed to more difficult ones (writing proofs in sequent calculus and Fitch-style proofs). 
 \\  \indent Importantly, it is acknowledged that author is writing down these words to serve his own needs: there is not intention on his side to make them user-friendly and readily comprehensible to others as their primary purpose in his mind is that they act as a store of relevant, concise information in the area considered.
 \\ \indent Last but not least, the conventions I assume are - at least to some extent - subjective - and are by no means universal. This is especially pronounced with respect to the distinction between \textit{observer's} and \textit{object} languages whose importance cannot be stressed enough.
 \section{Logical symbols: basics}
@@ -62,12 +67,42 @@ Let's consider a PL language with two atoms $P, Q$. The symbols that can be used
 \item Negation: $ \lnot P $: \verb+ \lnot P +
 \end{enumerate}
 \subsubsection{Connectives: \textit{observer's language}}
-Here, contrary to the previous section, the 
-\subsection{\textit{Observer's} versus \textit{object language}: further remarks}
-$ P \bigwedge Q$
-\section{Sequent calculus proofs}
+Here, contrary to the previous section, the PL language atoms are not available. Given that the observer's language here is English, let $P, Q$ be \textit{propositions} in
+English\footnote{Point well worth elaborating upon: what is meant here by a proposition in English is, very roughly, a statement of which it is possible to say whether it is true or false. }.
+\begin{enumerate}
+\item Conjunction $ P \bigwedge Q $, : \verb+ P \wedge Q +
+\item Disjunction (OR) $P \bigvee Q$: \verb+ P \bigvee Q + 
+\item Material conditional $ P \Rightarrow Q $: \verb+ P \Rightarrow Q +
+\item Equivalence: $ P \Leftrightarrow Q$: \verb+ P \Leftrightarrow Q +
+\item Negation: $ \lnot P $: \verb+ \lnot P +
+\end{enumerate}
+
+\subsection{\textit{Observer's} versus \textit{object language}: one more remark}
+Important symbols that are \textit{related} to the problem of consequence are:
+$$ \rightarrow,  \therefore $$
+They can be obtained using commands: \verb+ \rightarrow, \therefore +
+\\ As regards the \textit{meaning} of these symbols: I follow the notation of Smith\footnote{Given clarity with which \cite{smith_intro_formal_logic} is written, cf. section 18.8 therein for further accessible exposition of the use of these symbols.} \cite{smith_intro_formal_logic}, so $\rightarrow$ stands for logical connective of the \textit{object language} representing \textit{material conditional}, as mentioned above. The symbol $\therefore$ is also a member of the \textit{object language} and is used to represent an argument, which is whole given in the \textit{object language}.
+
+\section{Gentzen-styl sequent calculus proofs, package 'bussproofs'}
+Before presenting the relevant symbols, I make a detour to clarify what is meant here by 'sequent calculus'. I follow the classical position Kleene \cite{kleene_math_logic}, in which he defines the Gentzen-style calculus in paragraph 9.
+First symbols that come to mind are the semantic entailment $\models$ and synactic entailment $\vdash$ that can be obtained via Latex commands \verb+ \models +
+and \verb+ \vdash +.
+\\ \indent Elegant way of writing \textit{modus ponens} is:
+\begin{prooftree}
+\AxiomC{A}\AxiomC{B}\BinaryInfC{D}
+\end{prooftree}
+Next topic of interest here is a device for coherent writing of proofs/deductions. Let's present the above-mentioned Gentzen-style calculus as given in \cite{kleene_math_logic} (page 387):
+
+\begin{enumerate}
+\item[1a.] $ P \rightarrow (Q \rightarrow R)$
+\item[1b.] $ (P \rightarrow Q) \rightarrow ( (A \rightarrow (B \rightarrow C )) \rightarrow (A \rightarrow C) ) $
+\item[2.] Modus ponens:
+
+\end{enumerate}
 
 \section{Fitch-style proofs with package 'lplfitch'}
 
+\bibliography{mybibliography}
+\bibliographystyle{ieeetr}
 
 \end{document}
