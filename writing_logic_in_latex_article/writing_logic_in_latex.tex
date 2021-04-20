@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+
+\usepackage{lplfitch}
+\usepackage{amsmath}
+\usepackage{biblatex}
+
+\begin{document}
+
+\title{Latex: Writing Logical Expressions\footnote{What I mean hear by 'expression' is any sequence of symbols in an arbitrary alphabet of choice. The word 'expression' should be considered as element of the dictionary of the spoken (verncular?) English. By the way, this explanation constitutes a situation where the distinction \textit{suppositio formalis} vs \textit{suppositio materialis} evinces itself. For more on this, cf. }}
+\author{Artur Wegrzyn}
+\date{2021-04-20}
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+The purpose of this document is to investigate writing of logical expressions in Latex. I start with the simple cases (most importantly: logical connectives and quantifiers) and then proceed to more difficult ones (writing proofs in sequent calculus and Fitch-style proofs).
+\\  \indent Importantly, it is acknowledged that author is writing down these words to serve his own needs: there is not intention on his side to make them user-friendly and readily comprehensible to others as their primary purpose in his mind is that they act as a store of relevant, concise information in the area considered.
+\\ \indent Last but not least, the conventions I assume are - at least to some extent - subjective - and are by no means universal. This is especially pronounced with respect to the distinction between \textit{observer's} and \textit{object} languages whose importance cannot be stressed enough.
+\section{Logical symbols: basics}
+\subsection{Writing any expressions}
+The most obvious way to write atoms is writing them as ordinary single-dollar-sign-inline equations like the following one: $P, Q$, which is attained using the following Latex command:
+\begin{verbatim}
+$P$
+\end{verbatim}
+For an equation shown in a separate line, use dobule-dollar equations. That is, in order to get:
+$$ P \rightarrow Q$$
+use: 
+\begin{verbatim}
+$$ P \rightarrow Q$$
+\end{verbatim}
+Last but not least there are the Latex equations. Example of numbered equation:
+\begin{equation}
+P \rightarrow (Q \rightarrow P)
+\end{equation}
+This can be obtained using the following code:
+\begin{verbatim}
+\begin{equation}
+P \rightarrow (Q \rightarrow P)
+\end{equation}
+\end{verbatim}
+In order to suppress the automatic numbering of equations, append asterisk to the end of the equation invocation like this:
+\begin{verbatim}
+\begin{equation*}
+P \rightarrow (Q \rightarrow P)
+\end{equation*}
+\end{verbatim}
+which will be compiled into: 
+\begin{equation*}
+P \rightarrow (Q \rightarrow P)
+\end{equation*}
+
+\subsection{Logical connectives}
+It is of utmost importance to distinguish between the logician's two languages here, before moving on, i.e. between the \textit{observer's language} and \textit{object language}. Hence, this section splits in two parts, corresponding to the two languages.
+\subsubsection{Connectives: \textit{object language}}
+Let's consider a PL language with two atoms $P, Q$. The symbols that can be used to connect them are:
+\begin{enumerate}
+\item Conjunction $ P \wedge Q $, : \verb+ P \wedge Q +
+\item Disjunction (OR, i.e. inclusive) $P \vee Q$: there are two possibilities - either 
+\verb+ P \vee Q + or \verb+ P \lor Q + \footnote{Pun not intended.}
+\item Material conditional $ P \rightarrow Q $: \verb+ P \rightarrow Q +
+\item Equivalence: $ P \leftrightarrow Q$: \verb+ P \leftrightarrow Q +
+\item Negation: $ \lnot P $: \verb+ \lnot P +
+\end{enumerate}
+\subsubsection{Connectives: \textit{observer's language}}
+Here, contrary to the previous section, the 
+\subsection{\textit{Observer's} versus \textit{object language}: further remarks}
+$ P \bigwedge Q$
+\section{Sequent calculus proofs}
+
+\section{Fitch-style proofs with package 'lplfitch'}
+
+
+\end{document}
