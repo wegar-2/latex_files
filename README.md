@@ -7,5 +7,5 @@ I have no pretense of these texts being journal level articles since this is not
 
 ## Contents
 Currently the contents are stored in the following folders:
-1. *probability_calculus* - folder for storing all things that are mostly related to probability.
+1. *probability_calculus* - folder for storing all things that are related to probability as such to the largest extent.
 2. *time_series_analysis* - folder for storing notes on ARMA, GARCH class of processes, esp. on the estimation of model parameters.
