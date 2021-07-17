@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\begin{document}
+
+
+\title{A note on conditional probabilities of multivariate continuous variables with applications to time series analysis}
+\author{Artur Wegrzyn}
+\maketitle
+
+\abstract{This notes contains derivation of the chain of conditional probabilities for 
+multiple random variables. It is to serve as a reference later on during considerations 
+of MLE estimation of autoregressive processes. }
+
+
+\section{Introduction and notation}
+Let the three-tuple $(\Omega, \mathfrak{F}, \mathbb{P})$ be a probability space, later on
+ referred to briefly as simply $\Omega$. Let the following be continuous variables on 
+ $\Omega$: 1) $X, Y, Z$, 2) $X_1, X_2, ..., X_n$ and 3) $Y_0, Y_1, Y_2, ..., Y_T$. \\
+Let $f_X$ denote the probability density function of the variable $X$. 
+Let $f_{X|Y}$ denote the probability density function of $X$ with respect to $Y$.
+
+\section{Case of three variables}
+Let's start with the joint density of variables $X, Y, Z$, which has joind pdf 
+$f_{X, Y, Z}$. The following holds:
+\begin{equation*}
+f_{X, Y, Z}(x,y,z) = \frac{f_{X, Y, Z}}{1} \cdot 
+\frac{f_{Y, Z}(y,z)}{f_{Y, Z}(y,z)} \cdot
+\frac{f_{Z}(z)}{f_{Z}(z)}
+\end{equation*}
+matching the fractions numerators and denominators 'diagonally' yields:
+\begin{equation*}
+f_{X, Y, Z}(x,y,z) = \frac{f_{X, Y, Z}}{f_{Y, Z}(y,z)} \cdot 
+\frac{f_{Y, Z}(y,z)}{f_{Z}(z)} \cdot
+\frac{f_{Z}(z)}{1}
+\end{equation*}
+Using the definition of conditional distribution (for continuous variables):
+$$ 
+f_{X|Y}(x|y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}
+$$
+I rewrite one more time to arrive at the well-known result:
+\begin{equation*}
+f_{X, Y, Z}(x, y, z) = 
+f_{X|Y, Z}(x|y, z) \cdot f_{Y|Z}(y|z) \cdot f_Z(z)
+\end{equation*}
+
+\section{Case of \textit{n} variables}
+The three variables case presented in the previous section easily generalized to the case 
+of $n$ variables:
+
+\begin{equation*}
+\begin{split}
+f_{X_n, X_{n-1}, ..., X_0}(x_n, x_{n-1}, ..., x_1) = 
+& f_{X_n | X_{n-1}, ..., X_1}(x_n | x_{n-1}, ..., x_1) \cdot \\
+& f_{X_{n-1} | X_{n-2}, ..., X_1}(x_{n-1} | x_{n-2}, ..., x_1) \cdot ... \cdot \\
+& f_{X_2 | X_1} (x_2 | x_1) \cdot f_{X_1}(x_1)
+\end{split}
+\end{equation*}
+
+\section{Case of \textit{T} variables - with time series-like notation}
+The case below can be used in transformations of the likelihood function for various
+time series models:
+
+\begin{equation*}
+\begin{split}
+f_{Y_T, Y_{T-1}, ..., ,Y_1, Y_0}(y_T, t_{T-1}, ..., y_1, y_0) = 
+& f_{Y_T | Y_{T-1}, ..., Y_1, Y_0}(y_T | y_{T-1}, ..., y_1, y_0) \cdot \\
+& f_{Y_{T-1} | Y_{T-2}, ..., Y_1, Y_0}(y_{T-1} | y_{n-2}, ..., y_1) \cdot ... \cdot \\
+& f_{Y_1 | Y_0} (y_1 | y_0) \cdot f_{Y_0}(y_0)
+\end{split}
+\end{equation*}
+
+\end{document}

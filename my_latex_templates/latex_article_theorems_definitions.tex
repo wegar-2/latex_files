@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem} % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{exmp}[thm]{Example}
+\begin{document}
+
+\title{Title of the Article}
+\author{Artur Wegrzyn}
+\maketitle
+
+\tableofcontents
+
+\section{Writing theorems, definitions, examples, lemmas}
+\begin{defn}
+Effectively axiomatized formal theory is an effectively formalised language with 
+effectively decidable axioms...
+\end{defn}
+
+\begin{thm}
+\textbf{(Lagrange theorem for finite groups)} Let $G$ be a finite group...
+\end{thm}
+
+
+\section{Some formulas - how to write them in latex}
+Math inline: $\Omega$. \\
+Fancy probabilistic 'F': $\mathfrak{F}$. \\
+Probabilty - fat 'P': $\mathbb{P}$ \\ 
+Equation - not numbered:
+\begin{equation*}
+e^x = \sum_{n=1}^{\infty}\frac{x^n}{n!}
+\end{equation*}
+
+Equation - numbered:
+
+\begin{equation}
+y = ax^2 + bx + c
+\end{equation}
+
+\end{document}
