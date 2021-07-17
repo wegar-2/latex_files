@@ -1,0 +1,93 @@
+\documentclass[12pt]{article}
+
+%%\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%\usepackage{hyperref}
+\usepackage{url}
+
+
+\begin{document}
+
+\title{A note on conditional maximum likelihood estimation of gaussian AR(1) process [WiP!!!]}
+\author{Artur Wegrzyn}
+\maketitle
+
+\abstract{This note contains derivation of conditional maximum likelihood estimators of 
+parameters of AR(1) gaussian process. This note is intended as a future reference for the author, hence not too much intention is given at ensuring that propounding of all steps
+  is sufficient to satisfy the tastes of more fastidious readers. Also, notation is at times quite sloppy and is assumed to be self-explanatory.}
+
+\section{AR(1) process - overview}
+Let $\{Y_t\}_{t=-\infty}^{\infty}$ be a weakly stationary stochastic process that obeys the equation:
+\begin{equation}
+Y_t = \phi Y_{t-1} + c + \epsilon_t
+\end{equation}
+with gaussian error term, i.e.:
+\begin{equation}
+\epsilon_t \sim N(0, \sigma^2)
+\end{equation}
+and all the error terms being uncorrelated. Furthermore, suppose that $T+1$ consecutive 
+realizations of the process $\{Y_t\}$ are observed for times $t = 0, 1, ..., T$ and that
+ they are denoted $y_0, y_1, y_2, ..., y_T$. \\
+ 
+
+\section{Likelihood function}
+I start by looking at the conditional distribution of $Y_t$ with respect to $Y_{t-1}$. 
+To this end, suppose that the value of $Y_{t-1}$ is known and equal to $y_{t-1}$. Then:
+\begin{equation*}
+Y_t = c + \phi y_{t-1} + \epsilon_t
+\end{equation*}
+Unsurprisingly, then:
+$$ E(Y_t | Y_{t-1} = y_{t-1}) = c + \phi y_{t-1} $$
+$$Var(Y_t | Y_{t-1} = y_{t-1}) = \sigma^2 $$
+As $\{\epsilon_t\}$ has been assumed to be gaussian, it follows that the conditional 
+probability density function of $Y_t$ with respect to $Y_{t-1} = y_{t-1}$ is given by:
+\begin{equation}
+\label{ar_cond_density}
+f_{Y_t | Y_{t-1}}(y_t | y_{t-1}) = \frac{1}{\sigma \sqrt{2 \pi}}
+\exp \left( - \frac{1}{2} \frac{(y_t - c - \phi y_{t-1})^2}{\sigma^2} \right)
+\end{equation}
+This formula will be of great use in the next step which is rewriting of joint 
+probability density function of $(Y_T, Y_{T-1}, ..., Y_1, Y_0)$. 
+
+Consequently, let's deal with the joint density. Using the simple fact presented in
+ \cite{my_note_cond_prob_tsa}, I have: 
+
+\begin{equation*}
+\begin{split}
+f_{Y_T, Y_{T-1}, ..., ,Y_1, Y_0}(y_T, y_{T-1}, ..., y_1, y_0) = 
+& f_{Y_T | Y_{T-1}, ..., Y_1, Y_0}(y_T | y_{T-1}, ..., y_1, y_0) \cdot \\
+& f_{Y_{T-1} | Y_{T-2}, ..., Y_1, Y_0}(y_{T-1} | y_{n-2}, ..., y_1, y_0) \cdot ... \cdot \\
+& f_{Y_1 | Y_0} (y_1 | y_0) \cdot f_{Y_0}(y_0)
+\end{split}
+\end{equation*}
+
+Written more succintly:
+\begin{equation*}
+f_{Y_T, Y_{T-1}, ..., ,Y_1, Y_0}(y_T, y_{T-1}, ..., y_1, y_0) = 
+f_{Y_0}(y_0) \cdot
+ \prod_{t=1}^{T} f_{Y_t | Y_{t-1}, ..., y_0} (y_t | y_{t-1}, ..., y_0)
+\end{equation*}
+
+Since I aim for \textit{conditional} likelihood, I devide both sided by $f_{Y_0}(y_0)$ 
+and obtain:
+
+\begin{equation*}
+f_{Y_T, Y_{T-1}, ..., ,Y_1 | Y_0}(y_T, y_{T-1}, ..., y_1 | y_0) = 
+ \prod_{t=1}^{T} f_{Y_t | Y_{t-1}, ..., y_0} (y_t | y_{t-1}, ..., y_0)
+\end{equation*}
+
+Now, by equation \ref{ar_cond_density} one can easily see that since the value of the
+ process at time $t$ is conditional only on its value at time $t-1$ the conditional 
+ densities in the product in the equation above reduce as follows:
+ 
+
+\section{Derivation of maximum likelihood estimators of the parameters}
+
+\section{Literature}
+The exposition in this note follows closely the one in \cite{hamilton_tsa}, chapter 5.
+
+\bibliography{tsa_bibliography}
+\bibliographystyle{ieeetr}
+
+\end{document}
