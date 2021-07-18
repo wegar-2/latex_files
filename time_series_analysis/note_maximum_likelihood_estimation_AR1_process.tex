@@ -3,23 +3,28 @@
 %%\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
-%%\usepackage{hyperref}
 \usepackage{url}
 
 
 \begin{document}
 
-\title{A note on conditional maximum likelihood estimation of gaussian AR(1) process [WiP!!!]}
+\title{A note on gaussian AR(1) process [WiP!!!]}
 \author{Artur Wegrzyn}
 \maketitle
 
-\abstract{This note contains derivation of conditional maximum likelihood estimators of 
-parameters of AR(1) gaussian process. This note is intended as a future reference for the author, hence not too much intention is given at ensuring that propounding of all steps
-  is sufficient to satisfy the tastes of more fastidious readers. Also, notation is at times quite sloppy and is assumed to be self-explanatory.}
+\abstract{This note presents elementary properties of autoregressive AR(1) gaussian 
+process. It is intended as a future reference for the author, hence not too much effort
+ is made to ensure that propounding of all steps is sufficient to satisfy the tastes of 
+ more fastidious readers. Also, notation is at times quite sloppy and is assumed to be 
+ self-explanatory.}
+
+\tableofcontents
 
 \section{AR(1) process - overview}
-Let $\{Y_t\}_{t=-\infty}^{\infty}$ be a weakly stationary stochastic process that obeys the equation:
+Let $\{Y_t\}_{t=-\infty}^{\infty}$ be a weakly stationary stochastic process that obeys
+the equation:
 \begin{equation}
+\label{ar1_def_eqtn}
 Y_t = \phi Y_{t-1} + c + \epsilon_t
 \end{equation}
 with gaussian error term, i.e.:
@@ -73,19 +78,129 @@ Since I aim for \textit{conditional} likelihood, I devide both sided by $f_{Y_0}
 and obtain:
 
 \begin{equation*}
+\label{full_cond_density}
 f_{Y_T, Y_{T-1}, ..., ,Y_1 | Y_0}(y_T, y_{T-1}, ..., y_1 | y_0) = 
  \prod_{t=1}^{T} f_{Y_t | Y_{t-1}, ..., y_0} (y_t | y_{t-1}, ..., y_0)
 \end{equation*}
 
-Now, by equation \ref{ar_cond_density} one can easily see that since the value of the
+Now, by equation \eqref{ar_cond_density} one can easily see that since the value of the
  process at time $t$ is conditional only on its value at time $t-1$ the conditional 
  densities in the product in the equation above reduce as follows:
- 
 
-\section{Derivation of maximum likelihood estimators of the parameters}
+\begin{equation} 
+\label{reduction_cond_density}
+f_{Y_t | Y_{t-1}, Y_{t-2} ..., Y_0}(y_t | y_{t-1}, y_{t-2}, ..., y_0) = 
+f_{Y_t | Y_{t-1}} (y_t | y_{t-1})
+\end{equation}
 
-\section{Literature}
-The exposition in this note follows closely the one in \cite{hamilton_tsa}, chapter 5.
+The intuitive explanation of the above is that by \eqref{ar_cond_density} the density of 
+$Y_t$ is conditional on $Y_{t-1}$ only and not on $Y_{t-2}, Y_{t-3}, ...$. More formal
+ approach to this topic is presented in one of the later sections. \\
+For now, let's focus on obtaining an alaytical formula for the conditional likelihood 
+function. Substituting \eqref{reduction_cond_density} into \eqref{full_cond_density} 
+yields:
+
+\begin{equation}
+\label{cond_density_full_analytical_1}
+f_{Y_T, Y_{T-1}, ..., ,Y_1 | Y_0}(y_T, y_{T-1}, ..., y_1 | y_0) = 
+\prod_{t=1}^{T} \frac{1}{\sigma \sqrt{2\pi}} \exp \left(
+-\frac{1}{2} \frac{(y_t - c - y_{t-1})^2}{\sigma^2}
+\right)
+\end{equation}
+
+Since we consider the above as a function of the model parameters 
+$\phi, c, \sigma$ conditional on the sample $y_0, y_1, ..., y_T$ I introduce 
+the conditional lieklihood $L(\phi, c, \sigma | y_T, t_{T-1}, ..., y_1, y_0)$ as defined 
+using the equation \eqref{cond_density_full_analytical_1} :
+
+\begin{equation}
+\label{cond_density_full_analytical_2}
+ = 
+\prod_{t=1}^{T} \frac{1}{\sigma \sqrt{2\pi}} \exp \left(
+-\frac{1}{2} \frac{(y_t - c - y_{t-1})^2}{\sigma^2}
+\right)
+\end{equation}
+
+\section{Derivation of condtional maximum likelihood estimators of the parameters}
+This section contains transformations of the formula...
+
+\section{Rewriting AR(1) as MA($\infty$)}
+Let's go back to square one and aim for another interesting feature of AR(1) process.
+Start with the equation \eqref{ar1_def_eqtn}:
+\begin{equation*}
+Y_t = c + \phi y_{t-1} + \epsilon_t
+\end{equation*}
+
+Writing this equation for time $t-1$:
+\begin{equation*}
+Y_{t-1} = c + \phi y_{t-2} + \epsilon_{t-1}
+\end{equation*}
+Substitution of the formula for $Y_{t-1}$ into the formula for $Y_t$ yields:
+\begin{eqnarray*}
+Y_t = & c + \phi \left(
+c + \phi y_{t-2} + \epsilon_{t-1}
+\right) + \epsilon_t \\
+= & c + \phi c + \epsilon_t + \phi \epsilon_{t-1} + \phi^2 y_{t-2}
+\end{eqnarray*}
+Iterating one more time I obtain:
+\begin{equation*}
+Y_t =  c(1 + \phi + \phi^2) +
+(\epsilon_t + \phi \epsilon_{t-1} + \phi^2 \epsilon_{t-2}) +
+\phi^3 Y_{t-3}
+\end{equation*}
+Generalizing:
+\begin{equation*}
+Y_t =  c \sum_{k=0}^{n}\phi^k +
+\sum_{k=0}^{n} \phi^k \epsilon_{t-k} +
+\phi^{n+1} Y_{t-n-1}
+\end{equation*}
+Since $|\phi| < 1$, it follows that $\lim_{n \rightarrow \infty} \phi^{n+1} = 0$.
+Therefore\footnote{I deliberately restrain from intruducing the polynomial notation here
+to keep focus of what is of greatest interest here. }:
+
+\begin{equation*}
+\label{ar1_ma_representation}
+Y_t =  \frac{c}{1 - \phi} +
+\sum_{k=0}^{\infty} \phi^k \epsilon_{t-k}
+\end{equation*}
+
+
+\section{Unconditional distribution of $Y_t$}
+I continue the analysis in the vein of \eqref{ar1_ma_representation}. Since 
+all $\epsilon_t$ are normally, independently distributed with 
+$\epsilon_t \sim N(0, \sigma^2)$, then the $Y_t$ is also normally distributed
+with mean:
+\begin{equation*}
+E(Y_t) = \frac{c}{1 - \phi}
+\end{equation*}
+and variance:
+\begin{eqnarray*}
+Var(Y_t) = & Var(\sum_{n=0}^{\infty} \phi^n \epsilon_{t-n}) \\
+= & \sum_{n=0}^{\infty} \phi^{2n} sigma^2 \\
+= & \frac{\sigma^2}{1 - \phi^2}
+\end{eqnarray*}
+
+This allows me to write down the unconditional density of $Y_t$:
+\begin{equation*}
+f_{Y_t}(y_t) = \frac{1}{\sqrt{2 \pi} (\sigma / \sqrt{1-\phi^2})}
+\exp \left( 
+- \frac{1}{2} 
+\frac{(y_t - c/(1-\phi))^2}{\sigma^2/(1-\phi^2)}
+\right)
+\end{equation*}
+
+
+\section{Joint density of $(Y_{t+2}, Y_{t+1}, Y_t)$}
+Building on top of the results of two previous sections I aim at deriving the joint 
+density of $\{Y_t\}$ at three consecutive time instances, i.e. $Y_{t+2}, Y_{t+1}, Y_t$.
+
+
+\section{Unconditional maximum likelihood}
+
+
+\section{References}
+The exposition in this note follows closely the one in \cite{hamilton_tsa}, chapter 5. 
+Another useful reference is \cite{fuller_intro_tsa}.
 
 \bibliography{tsa_bibliography}
 \bibliographystyle{ieeetr}

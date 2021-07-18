@@ -6,3 +6,5 @@
 *.bcf
 *.blg
 *.ps
+*.out
+*.bbl
