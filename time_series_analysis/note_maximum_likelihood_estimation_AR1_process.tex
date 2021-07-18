@@ -176,24 +176,85 @@ E(Y_t) = \frac{c}{1 - \phi}
 and variance:
 \begin{eqnarray*}
 Var(Y_t) = & Var(\sum_{n=0}^{\infty} \phi^n \epsilon_{t-n}) \\
-= & \sum_{n=0}^{\infty} \phi^{2n} sigma^2 \\
+= & \sum_{n=0}^{\infty} \phi^{2n} \sigma^2 \\
 = & \frac{\sigma^2}{1 - \phi^2}
 \end{eqnarray*}
 
 This allows me to write down the unconditional density of $Y_t$:
-\begin{equation*}
+\begin{equation}
+\label{unconditional_density}
 f_{Y_t}(y_t) = \frac{1}{\sqrt{2 \pi} (\sigma / \sqrt{1-\phi^2})}
 \exp \left( 
 - \frac{1}{2} 
 \frac{(y_t - c/(1-\phi))^2}{\sigma^2/(1-\phi^2)}
 \right)
-\end{equation*}
+\end{equation}
 
 
-\section{Joint density of $(Y_{t+2}, Y_{t+1}, Y_t)$}
+\section{Joint density of $Y_{t+2}, Y_{t+1}, Y_t$}
 Building on top of the results of two previous sections I aim at deriving the joint 
 density of $\{Y_t\}$ at three consecutive time instances, i.e. $Y_{t+2}, Y_{t+1}, Y_t$.
+First, joint density of $Y_{t+1}, Y_t$ is by substitution of
+ \eqref{unconditional_density} and \eqref{ar_cond_density} into the formula:
+\begin{equation*}
+f_{Y_{t+1}, Y_t} (y_{t+1}, y_t) = f_{Y_{t+1} | Y_t} (y_{t+1} | y_t) f_{Y_t}(y_t)
+\end{equation*}
+which yields:
+\begin{eqnarray*}
+\label{bivariate_density}
+f_{Y_{t+1}, Y_t}(y_{t+1}, y_t) =
+\frac{\sqrt{1 - \phi^2}}{\sigma^2 \sqrt{2 \pi}}
+\exp \left(
+-\frac{(y_t - c/(1-\phi))^2
+(y_{t+1} - c - \phi y_t)^2}
+{2\sigma^2(1- \phi^2)} 
+\right)
+\end{eqnarray*}
+attack on the joint density of $Y_{t+2}, Y_{t+1}, Y_t$ proceeds analogously via:
+\begin{equation*}
+f_{Y_{t+2}, Y_{t+1}, Y_t} (y_{t+2}, y_{t+1}, y_t) = 
+f_{Y_{t+2} | Y_{t+1}, Y_t} (y_{t+2} | y_{t+1}, y_t) f_{Y_{t+1}, Y_t}(y_{t+1}, y_t)
+\end{equation*}
+But how is the condtional density $f_{Y_{t+2} | Y_{t+1}, Y_t}$ obtained? 
+To get it, let's reconsider the following relationships that express $Y_{t+2}$ as 
+a function of $Y_{t+1}$ or a function of $Y_t$:
+\begin{equation*}
+Y_{t+2} = c + \phi Y_{t+1} + \epsilon_{t+2}
+\end{equation*}
+\begin{equation*}
+Y_{t+2} = c + \phi c + \epsilon_{t+2} + \phi \epsilon_{t+1} + \phi^2 Y_t
+\end{equation*}
 
+First of these equations allows me to establish the following fact:
+\begin{equation*}
+Y_{t+2} | Y_{t+1} = y_{t+1} , Y_t = y_t \sim N(c + \phi y_{t+1}, \sigma^2)
+\end{equation*}
+
+Note that dependency of $Y_{t+2}$ on $Y_t$ is, by definition, already contained inside 
+$Y_{t+1}$. Hence, the conditional density of interest is:
+
+\begin{equation*}
+f_{Y_{t+2} | Y_{t+1}, Y_t} (y_{t+2} | y_{t+1}, y_t) = 
+\frac{1}{\sigma \sqrt{2 \pi}} 
+\exp \left(
+-\frac{1}{2} \frac{(y_{t+2} - c - \phi y_{t+1})^2}{\sigma^2}
+\right)
+\end{equation*}
+
+And the formula for the joint density of $f_{Y_{t+2}, Y_{t+1}, Y_t} (y_{t+2}, y_{t+1},
+ y_t)$ follows:
+
+\begin{eqnarray*}
+\label{threevariate_density}
+f_{Y_{t+2}, Y_{t+1}, Y_t} (y_{t+2}, y_{t+1}, y_t)& =
+\frac{\sqrt{1 - \phi^2}}{\sigma^3 (2 \pi)^{3/2}} \cdot \\
+& \exp \left(
+-\frac{(y_t - c/(1-\phi))^2
+(y_{t+1} - c - \phi y_t)^2
+(y_{t+2} - c - \phi y_{t+1})^2}
+{2\sigma^3(1- \phi^2)} 
+\right)
+\end{eqnarray*}
 
 \section{Unconditional maximum likelihood}
 
