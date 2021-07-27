@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{A note on gaussian AR(1) process [WiP!!!]}
+\title{A note on gaussian AR(1) process}
 \author{Artur Wegrzyn}
 \maketitle
 
@@ -104,7 +104,7 @@ yields:
 \label{cond_density_full_analytical_1}
 f_{Y_T, Y_{T-1}, ..., ,Y_1 | Y_0}(y_T, y_{T-1}, ..., y_1 | y_0) = 
 \prod_{t=1}^{T} \frac{1}{\sigma \sqrt{2\pi}} \exp \left(
--\frac{1}{2} \frac{(y_t - c - y_{t-1})^2}{\sigma^2}
+-\frac{1}{2} \frac{(y_t - c - \phi y_{t-1})^2}{\sigma^2}
 \right)
 \end{equation}
 
@@ -115,14 +115,91 @@ using the equation \eqref{cond_density_full_analytical_1} :
 
 \begin{equation}
 \label{cond_density_full_analytical_2}
- = 
-\prod_{t=1}^{T} \frac{1}{\sigma \sqrt{2\pi}} \exp \left(
--\frac{1}{2} \frac{(y_t - c - y_{t-1})^2}{\sigma^2}
+L(\phi, c, \sigma | y_T, t_{T-1}, ..., y_1, y_0) = 
+\prod_{t=1}^{T} \sigma^{-1} (2\pi)^{-1/2} \exp \left(
+-\frac{1}{2} \frac{(y_t - c -\phi y_{t-1})^2}{\sigma^2}
 \right)
 \end{equation}
 
+Later on I will be conditionality in the expression for $L$ for brevity so I will 
+be writing $L(\phi, c, \sigma)$ instead of 
+$L(\phi, c, \sigma | y_T, t_{T-1}, ..., y_1, y_0)$.
+
+
 \section{Derivation of condtional maximum likelihood estimators of the parameters}
-This section contains transformations of the formula...
+Let's pick up the expression \eqref{cond_density_full_analytical_2} and take natural 
+logarithm of both sides to obtain the log-likelihhod function $\mathcal{L}$:
+
+\begin{eqnarray*}
+\mathcal{L} (c, \phi, \sigma) 
+=& 
+\sum_{t = 1}^{T} \left[ 
+- \ln (\sigma) - \ln (2 \pi) - \frac{1}{2} \frac{(y_t - c -\phi y_{t-1})^2}{\sigma^2}
+\right] \\
+=& 
+- T \ln (\sigma) - \frac{T}{2} \ln (2 \pi) - 
+\frac{1}{2} \sum_{t = 1}^{T}  \frac{(y_t - c -\phi y_{t-1})^2}{\sigma^2}
+\end{eqnarray*}
+
+The conditional maximum likelihood estimators are obtained by putting the first 
+derivatives of $\mathcal{L}$ with respect to $\sigma, /phi, c$ to zero. These 
+derivatives are:
+
+% derivative w.r.t. sigma
+\begin{equation}
+\label{derivative_sigma}
+\frac{\partial \mathcal{L}}{\partial \sigma} = 
+- \frac{T}{\sigma} + \sum_{t = 1}^{T}  \frac{(y_t - c -\phi y_{t-1})^2}{\sigma^3}
+\end{equation}
+
+% derivative w.r.t. phi
+\begin{equation}
+\label{derivative_phi}
+\frac{\partial \mathcal{L}}{\partial \phi} = 
+\frac{1}{\sigma^2} \sum_{t = 1}^{T}  y_{t-1}(y_t - c -\phi y_{t-1})
+\end{equation}
+
+% derivative w.r.t. c
+\begin{equation}
+\label{derivative_c}
+\frac{\partial \mathcal{L}}{\partial c} = 
+\frac{1}{\sigma^2} \sum_{t = 1}^{T} (y_t - c -\phi y_{t-1})
+\end{equation}
+
+After putting to zero and solving the following estimators 
+$ \hat{c}, \hat{\phi}, \hat{\sigma}^2 $ are obtained. Firstly, estimator $\hat{\sigma}^2$ 
+is obtained from the equation \eqref{derivative_sigma}:
+\begin{equation*}
+\hat{\sigma}^2 = \frac{1}{(T+1) - 1} \sum_{t=1}^{T} 
+(y_t - \hat{c} -\hat{\phi} y_{t-1})^2
+\end{equation*}
+
+Equations \eqref{derivative_phi} and \eqref{derivative_c} make it possible to establish 
+that the following relations hold:
+
+\begin{equation*}
+\sum_{t=1}^{T} y_{t-1} (y_t - \hat{c} -\hat{\phi} y_{t-1}) = 0
+\end{equation*}
+
+\begin{equation*}
+\sum_{t=1}^{T} (y_t - \hat{c} -\hat{\phi} y_{t-1}) = 0
+\end{equation*}
+
+So that (conditional) maximum likelihood estimators for $\hat{c}, \hat{\phi}$ are given 
+by:
+\begin{equation*}
+\hat{\phi} = \frac{
+	\frac{1}{T}\sum_{t=1}^T y_t y_{t-1} - (\frac{1}{T} \sum_{t=1}^T y_t)
+	(\frac{1}{T} \sum_{t=1}^T y_{t-1})
+}{
+	\frac{1}{T}\sum_{t=1}^T y_{t-1}^2 - (\frac{1}{T} \sum_{t=1}^T y_t)^2
+}
+\end{equation*}
+
+\begin{equation*}
+\hat{c} = \frac{1}{T} \sum_{t=1}^T (y_t - \hat{\phi} y_{t-1})
+\end{equation*}
+
 
 \section{Rewriting AR(1) as MA($\infty$)}
 Let's go back to square one and aim for another interesting feature of AR(1) process.
@@ -256,11 +333,9 @@ f_{Y_{t+2}, Y_{t+1}, Y_t} (y_{t+2}, y_{t+1}, y_t)& =
 \right)
 \end{eqnarray*}
 
-\section{Unconditional maximum likelihood}
-
-
 \section{References}
 The exposition in this note follows closely the one in \cite{hamilton_tsa}, chapter 5. 
+This note should just be considered a subjective rephrasing of Hamilton's exposition.
 Another useful reference is \cite{fuller_intro_tsa}.
 
 \bibliography{tsa_bibliography}
