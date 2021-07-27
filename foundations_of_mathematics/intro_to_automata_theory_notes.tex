@@ -1,0 +1,114 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem} % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{exmp}[thm]{Example}
+\begin{document}
+
+\title{Introduction to Automata Theory [WiP!]}
+\author{Artur Wegrzyn}
+\maketitle
+
+\abstract{This text is intended to contain notes for the online course 
+\textit{Automata Theory} by Jeffrey Ullman\footnote{The course is offered on platform
+edx.org (as of 2021-07-27)}. Since you can read these words please note that the content
+ of this file is far from being in the final shape and that it has not yet been self-
+ reviewed to the extent that makes the author comfortable. Hence, dear reader, if you 
+ decide to do so, you are using this text at your own risk. }
+
+\tableofcontents
+
+\section{Graphs: Fundamentals}
+Given that graphs can be used as an 'intuition of first resort' when thinking about 
+automata, it might be useful to revise the relevant definitions in this area. \\
+\indent Note, however, that I am \textbf{not} saying that 'automata are graphs'! 
+Such a statement is simply not correct. All I want to do here is revising definitions 
+related to graphs.
+\\ \indent Throughout this section book \cite{intro_to_graph_theory} is used as a 
+reference. However, the definitions are not quoted literally and might be rephrased 
+at times to better draw attention to certain points that author considers interesting.
+
+\begin{defn}
+\textbf{(Graph)} Let $(V, E)$ be an ordered pair os sets, with $V$ being 
+\textit{vertex set} and $E$ being \textit{edge set} and with $V \neq \emptyset$ (i.e.
+it is required that $V$ is not an empty set). Moreover, elements of $E$ are required to 
+be two-element subsets of $V$. Then, the pair $(V, E)$ is a graph.
+\end{defn}
+
+The following definitions offers some useful vocabulary for talking about graphs.
+
+\begin{defn}
+\textbf{(Join/connection, incidence, adjacency, isolation)} Let $(V, E)$ be a graph.
+Let $e = \{x, y \}$ (by definition: $x, y \in V$) be an edge of this graph, 
+i.e. $e \in E$. Then, the edge $e$ is said to \textit{join} or \textit{connect} the 
+vertices $x$ and $y$. Furthermore, it is said of the vertices $x, y$ that they are 
+\textit{incident} to the edge $e$. Any two edges that are incident to the same 
+vertex are said to be \textit{adjacent}. Lastly, if there is a vertex that is 
+not incident to any edge of a graph then it is called \textit{isolated}.
+\end{defn}
+
+It should come as not surprise that equality of graphs is given by the following 
+definition:
+
+\begin{defn}
+\textbf{(Equality of graphs)} Consider two graphs $G_1 = (V_1, E_1)$ and
+$G_2 = (V_2, E_2)$. Graphs $G_1$ and $G_2$ are said to be \textit{equal} if 
+$V_1 = V_2$ and $E_1 = E_2$.
+\end{defn}
+
+\section{Building Blocks: Alphabet and Words}
+
+This section is intended as a pool of the most fundamental concepts needed throughout the 
+course for definitions of automata. 
+
+\begin{defn} \textbf{(Alphabet)} Consider a non-empty, finite set of (distinct) symbols 
+$\mathcal{A}$. Such a set is an alphabet.
+\end{defn}
+
+\begin{exmp}
+Alphabet $\mathcal{A} = \{a, b\}$ is a set consisting of latin letters $a$ and $b$. Note 
+that, crucially, the letters $a, b$ are used here as \textit{symbols} and they are 
+\textbf{not} used to denote e.g. number (like in algebra, where you can have that, 
+for instance, $a \in \mathbb{R} $).
+\end{exmp}
+
+\begin{defn}
+\textbf{(Binary alphabet)} The set $\mathcal{B} = \{ 0, 1 \}$ consisting of symbols
+$0$ and $1$ is called \textit{binary alphabet}.
+\end{defn}
+
+\begin{exmp}
+It is quite natural now to fix an alphabet $\mathcal{A}$ and to start considering
+ \textit{sequences} (finite or infinite) of symbols from the alphabet $\mathcal{A}$.
+ To this end, let's define the set $A_n$ to be (for $n = 0, 1, 2, ...$):
+\begin{equation*}
+A_n = \{ 0, 1, ..., n-1, n \}
+\end{equation*}
+Taking binary alphabet $\mathcal{B} = \{0, 1 \}$ I take the set of all 
+\textit{functions} from $A_n$ into $\mathcal{B}$ for $n=3$, i.e the set 
+$B_3 := \mathcal{B}^{A_3}$. One of its subsets is:
+
+
+\end{exmp}
+
+
+\section{Deterministic Finite Automata}
+
+\section{Bibliography}
+Unsurprisingly, the main reference is \cite{intro_to_automata_theory}.
+
+\bibliography{foundations_bibliography}
+\bibliographystyle{plabbrv}
+\end{document}
