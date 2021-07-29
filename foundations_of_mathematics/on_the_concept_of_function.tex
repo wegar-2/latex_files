@@ -7,7 +7,6 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
-
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem} % reset theorem numbering for each chapter
 
@@ -17,41 +16,117 @@
 \newtheorem{exmp}[thm]{Example}
 \begin{document}
 
-\title{On the concept of function [WiP!!!]}
+\title{Notes On the Concepts of Relation and Function [WiP]}
 \author{Artur Wegrzyn}
 \maketitle
 
 \selectlanguage{english}
 
-\abstract{The purpose of this article is to present the 
-concept of function. The overarching aim to provide multiple approaches to thinking 
-about how the properties of the function can be interpreted. Importantly, this note is 
-meant primarily for author's own use so some steps in the reasonings might be skipped.}
-
+\abstract{The purpose of this text is to store a number of facts related to the 
+concepts of \textit{relation} and \textit{function}. This note is primarily intended for
+ author's own use. }
 
 \tableofcontents
 
-\section{Introduction}
+
+\section{Existence of Cartesian product in ZFC}
+Fundamentally, I work with ZFC (cf. \cite{suppes_axiomatic_set_theory}, Chapter X for 
+more details; I am not going to introduce the full formalism here). 
+\subsection{Existence of Ordered Pair}
+Consider two non-empty sets $X$ and $Y$ and let $x, y$ be such that $x \in X, y \in Y$.  
+\begin{itemize}
+\item[1. ] By the Axiom of Pair it is possible to form the set $P$ given $x, y$:
+\begin{equation*}
+P = \{ x, y \}
+\end{equation*}
+\item[2. ] Take Kuratowski's definition of ordered pair $(x, y)$:
+\begin{equation}
+\label{ordered_pair_definition}
+(x, y) = \{ \{ x \}, \{ x, y \} \}
+\end{equation}
+But how can we justify existance of the set $(x,y)$?
+\item[3. ] Showing that \eqref{ordered_pair_definition} is allowed. Consider $x$ and 
+apply the Axiom of Pair to two sets $a, b$ such that $a = b = x$. 
+This yields the set $P_x$:
+\begin{equation*}
+P_x = \{ x, x \} = \{ x \}
+\end{equation*}
+\item[4. ] Now it has been established that the sets $\{ x \}$ and 
+$ \{ x, y \}$ exist for $x \in X, y \in Y$. Hence, applying Axiom of Pair 
+to $\{ x \}$ and $ \{ x, y \}$ one more time  yields a set $\Pi$:
+\begin{equation*}
+\Pi = \{ \{ x \}, \{ x, y \} \}
+\end{equation*}
+which is just \eqref{ordered_pair_definition}.
+\end{itemize}
+Thus, given non-empty sets $X$ and $Y$ and some of their members $x \in X$ and 
+$y \in Y$, it is permitted to form the ordered pair $(x, y)$. 
+
+\subsection{Existence of Cartesian product}
+It remains to be demonstrated that the set of all ordered pairs
+of members of $X$ and $Y$ also exists.
+\begin{itemize}
+\item[1. ] Take any $x \in X, y \in Y$ and form the ordered pair $(x, y)$.
+\item[2. ] Apply Axiom of Pair to $a$ and $b$ such that $a = b = (x, y)$ to get 
+the set $\{a, b \}$, i.e. the set $ \{ (x, y) \}$.
+\item[3. ] Use Axiom of Union to Form the following set $U_y$:
+\begin{equation*}
+U_y = \bigcup_{x \in X} \{ (x, y) \}
+\end{equation*}
+\item[4. ] Use Axiom of union again, this time - to form the following set $C$:
+\begin{equation}
+\label{definition_cartesian_product}
+C := \bigcup_{y \in Y} \bigcup_{x \in X} \{ (x, y) \} = \bigcup_{y \in Y} U_y
+\end{equation}
+\end{itemize}
+It remains to be shown that the set $C$ indeed contains all the ordered pairs that
+can be formed from the members of sets $X$ and $Y$. To this end, pick any
+$x_0 \in X$ and $y_0 \in Y$ and form the orderd pair $(x_0, y_0)$.
+\\ \indent The question still stands - is it the case that $(x_0, y_0) \in C$? 
+By definition:
+\begin{equation*}
+(x_0, y_0) \in C 
+\Leftrightarrow 
+\exists y \in Y: (x_0, y_0) \in U_y
+\end{equation*}
+Consider $y = y_0$. Since:
+\begin{equation*}
+U_{y_0} = \bigcup_{x \in X} \{ (x, y_0) \}
+\end{equation*}
+it does indeed hold that $(x_0, y_0) \in C$.
+\\ \indent It is now established that the set $C$ of all ordered pairs of the members
+of the sets $X$ and $Y$ exists. This set is called \textit{Cartesian product} and is
+ denoted $X \times Y$. To summarize:
+ 
+\begin{defn}
+\textbf{(Cartesian product of two sets)} Let $X, Y$ be nonempty sets. Then, the set
+of all ordered pairs $(x, y)$ such that $x \in X, y \in Y$ is denoted $X \times Y$ and 
+it is called the Cartesian product of sets $X$ and $Y$.
+\end{defn} 
 
 \section{Relations}
-
-\section{Function - definition}
-
-\section{Properties - set-theoretical approach}
-
-\section{Properties - algebraic approach}
-
-\section{Partial order vs strict order}
+Let's keep the sets $X$ and $Y$ nonempty. It has been established that it is permitted
+to form the Cartesian product $X \times Y$.
+\subsection{Definition of Relation}
+\subsection{Properties of Relation}
+\section{Orders}
+\subsection{Definitions of Various Kinds of Orders}
+\subsection{Strict Order and Weak Order}
+\section{Function - Definition}
+\section{Inverse Function - Definition 1}
+\section{Inverse Function - Definition 2}
+\section{Composition of Functions}
+\section{Important Application: Equipollence of Sets}
 
 \section{Bibliography}
-The concept of function is fundamental so it is covered in most of instroductory 
+The concept of function is a fundamental one for mathematics in general,
+ so it is discussed in most instroductory 
 handbooks that cover foundations of mathematics, algebra and analysis. 
-I would like to share subjective selection of bibliography in English and Polish here.
-In my view, the book \cite{sets_logic_computation} is an especially good reference for 
-those looking for both: general introduction to foundations of mathematics and 
-friendly exposition of the concept of function.
+\\ \indent I would like to share subjective selection of bibliography in English 
+and Polish here. In my view, the book \cite{sets_logic_computation} is an especially 
+friendly reference for  those looking for both: general introduction to foundations of 
+ mathematics and friendly exposition of the concept of function.
 
-\selectlanguage{polish}
 \bibliography{foundations_bibliography}
 \bibliographystyle{plabbrv}
 \end{document}
