@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem} % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{exmp}[thm]{Example}
+\begin{document}
+\title{Notes On the Diagonal Argument}
+\author{Artur Wegrzyn}
+\maketitle
+
+\abstract{The purpose of this text is to store a number of facts concerning the diagonal
+ argument. This note is primarily intended for author's own use. }
+
+\tableofcontents
+
+\section{Introduction to the Diagonal Argument}
+This section discusses at more length the version of the diagonal argument that seems 
+(at least to the author) the most insightful for those looking to understand the 
+underlying \textit{idea}. This exposition is intended to be just an extended
+rephrasing of the diagonal argument presented in the enlightening book by Smith
+\cite{intro_godel_theorems}. \\
+
+Consider the problem of equipollence of the set of natural numbers $\mathbb{N}$
+and the set of infinite sequences of ones and zeros -
+i.e. the set $\{0, 1 \}^{\mathbb{N}}$. 
+Assume that the two sets are equipollent, i.e. that there exists a 
+bijection\footnote{Note: the symbol $\rightarrow$ is taken to have different denotation
+ than the symbol $\longrightarrow$. The former is a logical connective representing 
+ logical conditional, whereas the latter is used in the definition of functions to 
+ represent the transition from the domain into the codomain of a function. }
+$f: \mathbb{N} \longrightarrow \{0, 1 \}^{\mathbb{N}}$. This means that the members 
+of the set $\{ 0, 1 \}^{\mathbb{N}}$ can be enumerated. In other words, if we wrote
+ down the values of $f$ for consecutive natural numbers:
+\begin{equation}
+\label{consecutive_f_values}
+f(0), f(1), f(2), ..., f(n-1), f(n), f(n+1), ...
+\end{equation}
+
+we could be sure to find a certain 
+$(x_n)_{n \in \mathbb{N}} \in \{ 0, 1 \}^{\mathbb{N}}$ 
+somewhere in the list \eqref{consecutive_f_values}. \\
+\indent As the next step, consider writing down the list of infinite binary sequences 
+in a tabular format - as demonstrated in the table
+\ref{tab:diagonal-arg-standard}. More specifically, suppose that each row of the table
+ corresponds to a value of $f$ for some natural number. The value is an infinite binary 
+ sequence, which is a mapping from the set of natural numbers into the set $\{ 0, 1 \}$.
+  It is therefore tempting to number the columns of the table with consecutive natural
+  numbers $0, 1, 2, ...$. The body of cells thus obtained can be considered
+  to be an infinite $\mathbb{N} \times \mathbb{N}$ matrix $A$:
+  $$A = [a_{m, n}]_{\mathbb{N} \times \mathbb{N}}$$
+ Where $m$ points at $m$-th row of the matrix and $n$ points at $n$-th column of 
+  the matrix (both indexes $m$ and $n$ start at zero).
+\\ \indent It stands to reason that the $m$-th row of the matrix $A$ is the value 
+of the function $f$ at $m$, i.e. an infinite binary sequence $f(m)$. 
+Taking:
+$$ f(m) = (a_{m, n})_{n \in \mathbb{N}} $$
+it is clear that the element $a_{m ,n}$ is the $n$-th binary digit of the 
+infinte binary sequence $f(m)$.
+
+\begin{table}[]
+\centering
+\begin{tabular}{llcccccccccccc}
+\textbf{n:} &
+  \textbf{} &
+  \textbf{0} &
+  \textbf{1} &
+  \textbf{2} &
+  \textbf{3} &
+  \textbf{4} &
+  \textbf{5} &
+  \textbf{6} &
+  \textbf{7} &
+  \textbf{8} &
+  \textbf{9} &
+  \textbf{10} &
+  \textbf{...} \\ \cline{1-13}
+\textbf{f(0):} &  & \textbf{1} & 1          & 0          & 0          & 0   & 1   & 0   & 1   & 1   & 1   & 0   & ... \\
+\textbf{f(1):} &  & 1          & \textbf{0} & 1          & 0          & 1   & 1   & 1   & 1   & 0   & 1   & 1   & ... \\
+\textbf{f(2):} &  & 1          & 1          & \textbf{0} & 0          & 1   & 1   & 0   & 0   & 1   & 0   & 0   & ... \\
+\textbf{f(3):} &  & 1          & 1          & 0          & \textbf{0} & 0   & 0   & 1   & 1   & 1   & 0   & 0   & ... \\
+...            &  & ...        & ...        & ...        & ...        & ... & ... & ... & ... & ... & ... & ... & ...
+\end{tabular}
+\caption{Putative bijection 
+$f: \mathbb{N} \longrightarrow \{0, 1\}^{\mathbb{N}} $ written down.
+Only first four values $f(0), f(1), f(2)$ and $f(3)$ 
+are (partially) shown. }
+\label{tab:diagonal-arg-standard}
+\end{table}
+
+
+\section{Generalized Form of the Diagonal Argument}
+
+\section{Applications of Diagonal Argument to Select Equipollence Problems}
+
+\section{Application of the Diagonal Argument to the Halting Problem}
+
+\section{Bibliography}
+
+\bibliography{foundations_bibliography}
+\bibliographystyle{plabbrv}
+\end{document}

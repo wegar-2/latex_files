@@ -107,8 +107,36 @@ it is called the Cartesian product of sets $X$ and $Y$.
 \section{Relations}
 Let's keep the sets $X$ and $Y$ nonempty. It has been established that it is permitted
 to form the Cartesian product $X \times Y$.
-\subsection{Definition of Relation}
-\subsection{Properties of Relation}
+
+\begin{defn}
+\textbf{(Relation)}
+Given a Cartesian product $X \times Y$ of two nonempty sets $X$ and $Y$ any subset $R$ of
+$X \times Y$ (i.e. $R \subset X \times Y$) is a relation.
+\end{defn}
+If $R \subset X \times Y$ then relation $R$ is called a relation \textit{over} 
+sets $X$ and $Y$. 
+If $R \subset X \times X$ then relation $R$ is called a relation \textit{in} set $X$. \\
+\indent Suppose that $(x, y) \in R$. Then it is said that $x$ is in relation $R$ 
+with $y$. Notation $xRy$ is also used to denote the fact that $(x, y) \in R$.
+
+\begin{defn}
+\textbf{(Properties of relations)} Let $R$ be a relation in set $X$. 
+Relation R is:
+\begin{itemize}
+\item[1. ] reflexive $:\Leftrightarrow$ $\forall x \in X: xRx$ 
+\item[2. ] anti-reflexive (or irreflexive) 
+$:\Leftrightarrow$ $\forall x \in X: \lnot xRx$ 
+\item[2. ] symmetric $:\Leftrightarrow \forall x, y \in X: xRy \rightarrow yRx$
+\item[3. ] anti-symmetric
+$:\Leftrightarrow \forall x, y \in X: xRy \rightarrow \lnot yRx$
+\item[4. ] asymmetric 
+\item[5. ] transitive
+$:\Leftrightarrow$ $\forall x, y, z \in X: (xRy \wedge yRz) \rightarrow xRz$ 
+\item[6. ] total (or connected)
+\end{itemize}
+\end{defn}
+
+
 \section{Orders}
 \subsection{Definitions of Various Kinds of Orders}
 \subsection{Strict Order and Weak Order}
