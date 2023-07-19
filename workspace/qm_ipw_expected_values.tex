@@ -1,0 +1,476 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[title]{appendix}
+\usepackage{physics}
+\usepackage{breqn}
+\begin{document}
+
+\title{Infinite Potential Well Problem: Expected Values of Position and Momentum}
+\author{Artur Wegrzyn}
+\date{September, 2022}
+\maketitle
+
+\abstract{These are my self-study notes pertaining to the basic infinite potential well problem. }
+
+
+\tableofcontents
+
+\newpage
+
+\section{Infinite Potential Well - Basics}
+One-dimensional Schrodinger equation with time-independent potential $V$:
+\begin{equation}
+i \hbar \frac{\partial \Psi}{\partial t}(x,t) = - \frac{\hbar^2}{2M} \frac{\partial^2 \Psi}{\partial x^2}(x,t) + V(x) \Psi(x, t)
+\end{equation}
+where $M$ stands for particle's mass.
+
+Infinite potential well of width $L$ is:
+\begin{equation*}
+V(x) =
+\begin{cases} 
+0 & \text{if $ x\in [0, L] $} \\ 
++\infty & \text{if $ x \not\in [0, L] $}
+\end{cases}
+\end{equation*}
+
+Time-independent Schrodinger equation \textbf{inside} the infinite well is:
+\begin{equation*}
+- \frac{\hbar^2}{2M} \frac{d^2 \psi}{ d x^2}(x) = E \psi(x)
+\end{equation*}
+
+The $n$-th solution (with $n \in \mathbb{N}_{+}=\{1, 2, 3, ... \}$) of the time-independent Schrodinger equation is:
+\begin{equation}
+\label{stationary_solution}
+\psi_n(x) = \sqrt{\frac{2}{L}} \sin \left( \frac{\pi n}{L}x \right)
+\end{equation}
+
+\noindent Energy corresponding to the $n$-th solution is:
+\begin{equation}
+E_n = \frac{\hbar^2}{2M} \frac{\pi^2 n^2}{L^2}
+\end{equation}
+
+\noindent It will be helpful to have the difference between energies for states $m$ and $n$ available later on:
+\begin{equation}
+E_m - E_n = \frac{\hbar^2}{2M} \frac{\pi^2}{L^2} (m^2 - n^2)
+\end{equation}
+
+\noindent Reminder: the Hamiltionian operator $\hat{H}$ is defined to be:
+\begin{equation*}
+\hat{H} := - \frac{\hbar^2}{2M}\frac{\partial^2}{\partial x^2} + V
+\end{equation*}
+
+\noindent whereas the momentum operator is defined as:
+\begin{equation}
+\hat{p} := -i \hbar \frac{\partial}{\partial x}
+\end{equation}
+
+\noindent Consequently, Hamiltonian can be rewritten as:
+\begin{equation*}
+\hat{H} = \frac{\hat{p}^2}{2M} + V
+\end{equation*}
+
+\noindent Last but not least, the $n$-th solution of the time-independent Schrodinger equation is an eigenfunction of the Hamiltonian that corresponds to the eigenvalue $E_n$:
+\begin{equation*}
+\hat{H} \psi_n = E_n \psi_n
+\end{equation*}
+
+\noindent The solution of the Schrodinger equation in the infinite well is:
+\begin{equation}
+\label{solution_infinite_well}
+\Psi(x, t) = \sum_{n=1}^{\infty} c_n \phi_n(t) \psi_n(x)
+\end{equation}
+
+\noindent with $\phi_n(t)$ given by:
+\begin{equation}
+\phi_n(t) = \exp \left( 
+- i E_n t / \hbar
+\right)
+\end{equation}
+
+
+
+\section{Partial derivative $\partial \Psi / \partial x$}
+Differentiating \eqref{stationary_solution} with repect to position $x$ gives:
+\begin{equation}
+\frac{\partial \Psi}{\partial x} = \sum_{n=1}^{\infty} c_n \phi_n(t) \frac{d \psi_n(x)}{dx}
+\end{equation}
+
+\noindent Since: 
+\begin{equation*}
+\frac{d \psi_n}{dx} = \sqrt{\frac{2}{L}} \frac{\pi n}{L} \cos \left( \frac{\pi n}{L} x \right)
+\end{equation*}
+
+\noindent Then:
+\begin{equation}
+\label{derivative_psi_wrt_x}
+\frac{\partial \Psi}{\partial x} = \sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} c_n \phi_n \frac{\pi n}{L} \cos \left( \frac{\pi n}{L} x \right)
+\end{equation}
+
+\section{Product $\Psi^* \Psi$}
+The wave function $\Psi$ for IWP is:
+\begin{equation*}
+\Psi = \sum_n c_n \phi_n \psi_n
+\end{equation*}
+
+\noindent Hence, the product $\Psi^* \Psi$ is:
+\begin{equation}
+\label{qm_density_inf_sum}
+\Psi^{*} \Psi = \left( 
+	\sum_m c_m^* \phi_m^* \psi_m
+\right) \left(
+	\sum_n c_n^* \phi_n^* \psi_n
+\right) = \sum_{m, n} c_m^* c_n \phi_m^* \phi_n \psi_m \psi_n
+\end{equation}
+
+\section{Notation for Parity of Natural Numbers}
+Consider set of pairs of natural numbers greater than zero: $ \mathbb{N}_+ \times \mathbb{N}_+ $. I define the relation $P$, 
+$P \subset \mathbb{N}_+ \times \mathbb{N}_+$ of identical parity of two distinct natural numbers on this set in the following manner:
+
+\begin{equation}
+P := \lbrace
+(m, n) \in \mathbb{N}_+ \times \mathbb{N}_+: m \neq n \land m \equiv n \mod 2 
+\rbrace
+\end{equation}
+
+\noindent Analogously, the relation $R$ of odd parity of pair of distinct natural numbers on this set is therefore:
+\begin{equation}
+R := \lbrace
+(m, n) \in \mathbb{N}_+ \times \mathbb{N}_+: m \neq n \land m \not\equiv n \mod 2 
+\rbrace
+\end{equation}
+
+\noindent The sets $P$ and $R$ thus defined will be used later. Unsurprisingly:
+\begin{equation*}
+\mathbb{N}_+ \times \mathbb{N}_+ = P \cup R \cup \lbrace
+(n, n): n \in \mathbb{N}_+
+\rbrace
+\end{equation*}
+
+
+\section{Useful integrals}
+\subsection{Trigonometric identities}
+In this section I list the basic trigonometric identities that are needed to derive the integrals in the subsequent subsections. These are:
+\begin{eqnarray*}
+\sin^2 x &=& 1 - \cos^2 x \\
+\cos^2 x &=& 1 - \sin^2 x \\
+\cos 2x &=& \cos^2 x - \sin^2 x \\
+\sin^2 x &=& \frac{1}{2} \left(1 - \cos 2x \right) \\
+\cos^2 x &=& \frac{1}{2} \left(  1 + \cos 2x  \right) \\ 
+\sin (x+y) &=& \sin x \cos y + \cos x \sin y \\
+\cos (x+y) &=& \cos x \cos y + \sin x \sin y \\
+\sin x \sin y &=& \frac{1}{2} \left( \cos (x-y) - \cos (x+y) \right) \\
+\sin x \cos y &=& \frac{1}{2} \left( \sin(x+y) + \sin(x-y)  \right) \\
+\end{eqnarray*}
+
+
+\subsection{Integral of $\sin^2 nx$}
+\begin{equation*}
+I^{s, s}_{n, n} := \int \sin^2 nx dx = \frac{1}{2} \int \left(1 - \cos 2nx \right) dx = \frac{1}{2}x - \frac{1}{4n} \sin 2nx + C
+\end{equation*}
+
+\subsection{Integral of $ \sin mx \sin nx $ for $m \neq n$}
+\begin{eqnarray*}
+\int \sin mx \sin nx dx &=& \frac{1}{2} \int \left( \cos (m-n)x - \cos (m+n)x \right) dx \\
+				&=& \frac{\sin(m-n)x}{2(m-n)} - \frac{\sin(m+n)x}{2(m+n)}  + C
+\end{eqnarray*}
+
+
+\subsection{Integral of $ \cos^2 nx $}
+\begin{eqnarray*}
+\int \cos^2 nx dx = \frac{1}{2} \int  \left(  1 + \cos 2nx  \right) dx 
+				&=& \frac{1}{2} x + \frac{1}{4n} \sin 2nx + C
+\end{eqnarray*}
+
+
+\subsection{Integral of $ \sin nx \cos nx $}
+\begin{eqnarray*}
+\int \sin nx \cos nx dx = \frac{1}{2} \int \sin 2nx dx = - \frac{1}{4n} \cos 2nx + C
+\end{eqnarray*}
+
+\subsection{Integral of $ \sin mx \cos nx $}
+\begin{eqnarray*}
+\int \sin mx \cos nx dx &=& \frac{1}{2} \int \sin (m+n) x + \sin (m-n) x dx \\
+				&=& -\frac{1}{2(m+n)} \cos (m+n) x - \frac{1}{2(m-n)} \cos (m-n) x + C
+\end{eqnarray*}
+
+
+
+\subsection{Integral of $x \sin^2 nx$}
+Integrating by parts: 
+\begin{eqnarray*}
+\int x \sin^2 nx dx &=& x \int \sin^2 nx dx - \int \left( \int \sin^2 nx \right) dx \\
+		&=& \left( \frac{1}{2}x^2 - \frac{x}{4n} \sin 2nx \right) -
+			\int \left( \frac{1}{2}x - \frac{1}{4n} \sin 2nx \right) dx \\
+		&=& \left( \frac{1}{2}x^2 - \frac{x}{4n} \sin 2nx \right) - 
+			\left(
+				\frac{1}{4}x^2 + \frac{1}{8n} \cos 2nx 	
+			\right) + C \\
+		&=& \frac{1}{4} x^2 - \frac{x}{4n} \sin 2nx - \frac{1}{8n} \cos 2nx + C
+\end{eqnarray*}
+
+
+\subsection{Integral of $x \sin nx \sin mx$}
+Integration by parts yields:
+\begin{eqnarray*}
+I &=& \int x \sin mx \sin nx dx = x \int \sin mx \sin nx dx - \int \left( \int \sin mx \sin nx dx \right) dx \\
+	&=& \left(  \frac{x \sin(m-n)x}{2(m-n)} - \frac{x \sin(m+n)x}{2(m+n)} \right) \\
+	&& - \int \left( \frac{\sin(m-n)x}{2(m-n)} - \frac{\sin(m+n)x}{2(m+n)} \right) dx \\
+	&=&  \frac{x \sin(m-n)x}{2(m-n)}  + \frac{x \sin(m+n)x}{2(m+n)}  \\
+	&& - \left( -\frac{\cos(m-n)x}{2(m-n)^2} + \frac{\cos(m+n)x}{2(m+n)^2}  \right) \\
+	&=& \frac{x\sin(m-n) x}{2(m-n)}  - \frac{x \sin(m+n)x}{2(m+n)}  + \frac{\cos(m-n)x}{2(m-n)^2}  - \frac{\cos(m+n)x}{2(m+n)^2} + C
+\end{eqnarray*}
+
+\noindent Consequently:
+\begin{eqnarray*}
+I &=& \int x \sin mx \sin nx dx \\
+&=& \frac{x\sin(m-n) x}{2(m-n)} - \frac{x \sin(m+n)x}{2(m+n)}  + \frac{\cos(m-n)x}{2(m-n)^2}  - \frac{\cos(m+n)x}{2(m+n)^2} + C
+\end{eqnarray*}
+
+
+
+\section{Expected Value of an Operator}
+Let $\hat{A}$ be an operator representing the observable $A$. Then, the expected value of $A$ is obtained from the formula:
+\begin{equation}
+ \langle A \rangle = \int \Psi^* \hat{A} \Psi dx
+\end{equation}
+
+
+\section{Position $x$}
+The observable $x$ is represented by operator $\hat{x} = x$ so that the expected value of position is:
+\begin{equation*}
+\langle p \rangle = \int_0^L \Psi^* \hat{x} \Psi dx =  \int_0^L \Psi^* x \Psi dx =  \int_0^L x \Psi^* \Psi dx
+\end{equation*}
+
+\noindent Since:
+\begin{equation*}
+\Psi = \sum_n c_n \phi_n \psi_n
+\end{equation*}
+
+\noindent It follows that:
+\begin{equation*}
+\int_0^L x \Psi^* \Psi dx = \sum_{m,n} c^{*}_m c_n \phi^{*}_m \phi_n \int_0^L x \psi_m \psi_n dx
+\end{equation*}
+
+\noindent Calculating the last integral in the expression above:
+\begin{eqnarray}
+\nonumber
+\int_{0}^{L} x \psi_m \psi_n dx 
+&=& \int_{0}^{L} x \frac{2}{L} \sin \frac{\pi m x}{L} \sin \frac{\pi n x}{L} dx \\ \nonumber
+&=& { \displaystyle \frac{2}{L}\int_{0}^{L} x \sin \frac{\pi m x}{L} \sin \frac{\pi n x}{L} dx } \\ \nonumber
+&=& \displaystyle \frac{2}{L}\int_{0}^{\pi} x \sin mx \sin nx dx
+\end{eqnarray}
+
+\noindent Let $X_{m,n}$ denote: 
+\begin{equation}
+X_{m,n} = \int_0^L x \psi_m \psi_n dx
+\end{equation}
+
+\noindent Using change of variables $x \mapsto \pi x / L$ gives:
+\begin{equation}
+X_{m, n} = \frac{2L}{\pi^2} \int_{0}^{\pi} x \sin mx \sin nx dx
+\end{equation}
+
+
+\subsection{$X_{m, n}$ for $m=n$}
+For $m=n$:
+\begin{eqnarray}
+X_{m, n} = X_{n, n}  = \frac{2L}{\pi^2} \int_{0}^{\pi} x \sin^2 nx dx
+\end{eqnarray}
+
+\noindent The integral in the formula for $X_{n, n}$ is readily evaluated to be:
+\begin{eqnarray*}
+\int_0^{\pi} x \sin^2 nx dx &=& \left[ 
+\frac{1}{4} x^2 - \frac{x}{4n} \sin 2nx - \frac{1}{8n} \cos 2nx 
+\right]_{0}^{\pi} \\
+ &=& \left( \frac{1}{4} \pi^2 - \frac{1}{8n} \right) - \left(0 - \frac{1}{8n} \right) = \frac{1}{4} \pi^2
+\end{eqnarray*}
+
+\noindent Hence:
+\begin{equation}
+X_{n, n} = \frac{2L}{\pi^2} \frac{\pi^2}{4} = \frac{L}{2}
+\end{equation}
+
+
+\subsection{$X_{m, n}$ for $m \neq n$}
+When $m \neq n$:
+\begin{equation}
+X_{m, n} = \frac{2L}{\pi^2} \int_{0}^{\pi} x \sin mx \sin nx dx
+\end{equation}
+
+\noindent The integral in the formula for $X_{m, n}$ is:
+\begin{dmath*}
+\int_{0}^{\pi} x \sin mx \sin nx dx = \left[ \frac{x\sin(m-n) x}{2(m-n)} - \frac{x \sin(m+n)x}{2(m+n)}  + \frac{\cos(m-n)x}{2(m-n)^2}  - \frac{\cos(m+n)x}{2(m+n)^2} \right]^{\pi}_{0} 
+\end{dmath*}
+
+\noindent Note that the values of the trigonometric functions involved in the forumula above depend on the parity of $m$ and $n$. Hence, two cases need to be considered.
+
+\subsubsection{Case: $m, n$ are of the same parity}
+If: $m \equiv n \mod 2$ then:
+\begin{equation}
+X_{m,n} = \frac{2L}{\pi^2} 
+\end{equation}
+
+\subsubsection{Case: $m, n$ are of different parity}
+If: $m \not\equiv n \mod2$ then:
+\begin{equation}
+X_{m,n} = \frac{2L}{\pi^2} \left(
+	\frac{-4mn}{(m+n)^2(m-n)^2}
+\right) = \frac{-8Lmn}{\pi^2(m-n)^2 (m+n)^2}
+\end{equation}
+
+\subsection{Formula for $\langle x \rangle $}
+As has been demonstrated above:
+\begin{equation}
+X_{m, n} = 
+\begin{cases} 
+\displaystyle \frac{L}{2}  & \text{if $ m=n $} \\ 
+\displaystyle 0 & \text{if $(m, n) \in P$} \\
+\displaystyle \frac{-8Lmn}{\pi^2(m-n)^2 (m+n)^2} & \text{if $(m, n) \in R$} 
+\end{cases}
+\end{equation}
+
+\noindent On substitution into formula for $\langle x \rangle$ I obtain:
+\begin{equation}
+\langle x \rangle = \sum_{(m,n) \in \mathbb{N}_+^2} c_m^* c_n \phi_m^2 \phi_n X_{m, n}
+\end{equation}
+
+\noindent Transforming the expression further:
+\begin{eqnarray*}
+\langle x \rangle &=& \sum_{(m,n) \in \mathbb{N}_+^2} c_m^* c_n \phi_m^2 \phi_n X_{m, n} \\
+&=& \sum_{n=1}^{\infty} |c_n|^2 \frac{L}{2} + \sum_{(m,n) \in R} c_m^* c_n \phi_m^* \phi_n \frac{-8Lmn}{\pi^2(m-n)^2 (m+n)^2}
+\end{eqnarray*}
+
+\noindent So that:
+\begin{equation}
+\label{derivative_exp_pos_wrt_time}
+\langle x \rangle = \frac{L}{2} - 8L \sum_{(m,n) \in R} c_m^* c_n \phi_m^* \phi_n \frac{mn}{\pi^2(m^2-n^2)^2}
+\end{equation}
+
+
+
+\section{Momentum $p$}
+Observable $p$ is represented by opearator $\hat{p}$ equal:
+\begin{equation*}
+\hat{p} = -i \hbar \frac{\partial}{\partial x}
+\end{equation*} 
+
+\noindent As a result, the expected value of $p$ is:
+\begin{equation}
+\langle p \rangle = \int \Psi^* \hat{p} \Psi dx = - i \hbar \int \Psi^* \frac{\partial \Psi}{\partial x} dx
+\end{equation}
+
+\noindent Recall the derivative with respect to position \eqref{derivative_psi_wrt_x}:
+\begin{equation*}
+\frac{\partial \Psi}{\partial x} = 
+\sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} c_n \phi_n \frac{\pi n}{L} \cos \left( \frac{\pi n}{L} x \right)
+\end{equation*}
+
+\noindent Hence:
+\begin{eqnarray*}
+\langle p \rangle &=& - i \hbar \int \Psi^* \frac{\partial \Psi}{\partial x} dx \\
+				&=& - i \hbar \int_0^L \left(  \sum_{m=1}^{\infty}  c_m^* \phi_m^* \psi_m
+					 \right) \left( 
+					 	\sum_{n=1}^{\infty}c_n \phi_n \frac{d \psi_n}{dx}
+					 	\right) dx \\
+				&=& - i \hbar \sum_{m,n} c_m^* c_n \phi^*_m \phi_n \int_0^L\psi_m  \frac{d \psi_n}{dx} dx
+\end{eqnarray*}
+
+\noindent Define:
+\begin{equation}
+Y_{m, n} := \int_0^L \psi_m \frac{d \psi_n}{dx} dx
+\end{equation}
+
+\noindent Then, after change of variables:
+\begin{eqnarray*}
+Y_{m, n} &=&  \frac{2 \pi n}{L^2} \int_0^L \sin \frac{\pi m}{L}x \cos \frac{\pi n}{L}x dx \\
+ 		&=& \frac{2n}{L} \int_{0}^{\pi} \sin mx \cos nx dx
+\end{eqnarray*}
+
+\subsection{$Y_{m, n}$ for $m = n$}
+\begin{eqnarray}
+Y_{n, n} &=& \frac{n}{L} \int_0^L 2 \sin nx \cos nx dx \\
+ 		&=& \frac{n}{L} \int_0^L \sin 2nx dx = \frac{n}{L} \left[-\frac{1}{2n} \cos 2nx \right]_0^{\pi} \\
+ 		&=& \frac{1}{2L} \left( 	(-1) - (-1)	\right) = 0
+\end{eqnarray}
+
+
+\subsection{$Y_{m, n}$ for $m \neq n$}
+When $m \neq n$:
+\begin{eqnarray*}
+Y_{m, n} &=& \frac{2n}{L} \int_{0}^{\pi} \sin mx \cos nx dx \\
+		&=& \frac{2n}{L} \left[
+			-\frac{1}{2(m+n)} \cos (m+n) x - \frac{1}{2(m-n)} \cos (m-n) x
+		\right]^{\pi}_{0}
+\end{eqnarray*}
+
+\subsubsection{Case: $m, n$ are of the same parity}
+\begin{eqnarray*}
+Y_{m, n} &=& \frac{2n}{L}
+				\left[
+							 \left( 	-\frac{1}{2(m+n)} - \frac{1}{2(m-n)}	\right)  - 
+					\left( 	-\frac{1}{2(m+n)} - \frac{1}{2(m-n)}	\right)				
+				\right] = 0
+\end{eqnarray*}
+
+\subsubsection{Case: $m, n$ are of different parities}
+\begin{eqnarray*}
+Y_{m, n} &=& \frac{2n}{L}
+		\left[
+		 \left( 	\frac{1}{2(m+n)} + \frac{1}{2(m-n)}	\right)  - 
+				\left( 	-\frac{1}{2(m+n)} - \frac{1}{2(m-n)}	\right)
+				\right] \\
+		&=& \frac{4 m n}{L(m^2 - n^2)}
+\end{eqnarray*}
+
+\subsection{Formula for $\langle p \rangle$}
+It has been demonstrated above that:
+\begin{equation}
+Y_{m, n} = 
+\begin{cases} 
+\displaystyle 0  & \text{if $ m=n $ or $ (m,n) \in P $} \\ 
+\displaystyle \frac{-8Lmn}{\pi^2(m-n)^2 (m+n)^2} & \text{if $(m, n) \in R$} 
+\end{cases}
+\end{equation}
+
+\noindent Substituting the values of $Y_{m, n}$ into the formula for $\langle p \rangle$ yields:
+
+\begin{eqnarray*}
+\langle p \rangle &=&  - i \hbar \sum_{m,n} c_m^* c_n \phi^*_m \phi_n Y_{m, n} \\
+		&=& - \frac{4 i \hbar}{L}  \sum_{(m,n) \in R} c_m^* c_n \phi^*_m \phi_n \frac{ m n}{m^2 - n^2} \\
+\end{eqnarray*}
+
+
+
+\section{Ehrenfest's Theorem - Check for IWP's Position and Momentum}
+According to Erhenfest's theorem for position and momentum the following equality holds:
+\begin{equation}
+\label{ehrenfest_theorem_case_position_and_momentum}
+M \frac{d \langle x \rangle }{dt} = \langle p \rangle
+\end{equation}
+
+\noindent By \eqref{derivative_exp_pos_wrt_time} the derivative $d\langle x \rangle / dt$ is:
+\begin{equation}
+\frac{d \langle x \rangle}{dt} = 
+-8L \sum_{(m,n) \in P'} c_m^* c_n  \frac{mn}{\pi^2(m^2-n^2)^2} \frac{d (\phi_m^* \phi_n)}{dt}
+\end{equation}
+
+\noindent The time derivative of the product $\phi_m \phi_n$ is needed:
+\begin{eqnarray*}
+\frac{d(\phi_m^* \phi_n)}{dt} &=& \frac{d}{dt} \exp \left( \frac{it}{\hbar}(E_m - E_n) \right) \\
+		&=& \frac{d}{dt} \exp \left( \frac{it}{\hbar} \frac{\hbar^2 \pi^2 (m^2 - n^2)}{2M L^2}  \right)\\
+		&=& \frac{d}{dt} \exp \left( it \frac{\hbar \pi^2}{2M L^2}(m^2 - n^2)  \right) \\
+		&=& i \frac{\hbar \pi^2}{2M L^2}(m^2 - n^2)  \phi_m^* \phi_n
+\end{eqnarray*}
+
+
+
+\noindent Substituting into the formula for $d \langle x \rangle / dt$:
+\begin{equation}
+\frac{d \langle x \rangle}{dt} = 
+- \frac{4i \hbar }{M L} \sum_{(m,n) \in P'} c_m^* c_n \phi_m \phi_n \frac{mn}{m^2 - n^2}
+\end{equation}
+So we see that the equality \eqref{ehrenfest_theorem_case_position_and_momentum} holds.
+
+\end{document}
+

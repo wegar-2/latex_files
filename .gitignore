@@ -1,3 +1,4 @@
+.DS_Store
 *.toc
 *.xml
 *.dvi
@@ -8,3 +9,4 @@
 *.ps
 *.out
 *.bbl
+*.gz

@@ -1,0 +1,197 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[title]{appendix}
+
+\begin{document}
+
+\title{Infinite Potential Well: Various Considerations}
+\author{Artur Wegrzyn}
+\maketitle
+
+\abstract{
+This notebook contains various facts and considerations related to one-dimensional Schrodinger equation for infinite well potential. 
+}
+
+\tableofcontents
+
+\section{Infinite Potential Well - Basics}
+One-dimensional Schrodinger equation with time-independent potential $V$:
+\begin{equation}
+i \hbar \frac{\partial \Psi}{\partial t}(x,t) = - \frac{\hbar^2}{2m} \frac{\partial^2 \Psi}{\partial x^2}(x,t) + V(x) \Psi(x, t)
+\end{equation}
+
+Infinite potential well of width $L$ is:
+\begin{equation}
+V(x) =
+\begin{cases} 
+0 & \text{if $ x\in [0, L] $} \\ 
++\infty & \text{if $ x \not\in [0, L] $}
+\end{cases}
+\end{equation}
+
+Time-independent Schrodinger equation \textbf{inside} the infinite well:
+\begin{equation}
+- \frac{\hbar^2}{2m} \frac{d^2 \psi}{ d x^2}(x) = E \psi(x)
+\end{equation}
+
+The $n$-th solution (with $n \in \mathbb{N}_{+}=\{1, 2, 3, ... \}$) of the time-independent Schrodinger equation is:
+\begin{equation}
+\psi_n(x) = \sqrt{\frac{2}{L}} \sin \left( \frac{\pi n}{L}x \right)
+\end{equation}
+
+\noindent Energy corresponding to the $n$-th solution is:
+\begin{equation}
+E_n = \frac{\hbar^2}{2m} \frac{\pi^2 n^2}{L^2}
+\end{equation}
+
+\noindent Reminder: the Hamiltionian operator $\hat{H}$ is defined to be:
+\begin{equation}
+\hat{H} := - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V
+\end{equation}
+
+\noindent whereas the momentum operator is defined as:
+\begin{equation}
+\hat{p} := -i \hbar \frac{\partial}{\partial x}
+\end{equation}
+
+\noindent Consequently, Hamiltonian can be rewritten as:
+\begin{equation}
+\hat{H} = \frac{\hat{p}^2}{2m} + V
+\end{equation}
+
+\noindent Last but not least, the $n$-th solution of the time-independent Schrodinger equation is an eigenfunction of the Hamiltonian that corresponds to the eigenvalue $E_n$:
+\begin{equation}
+\hat{H} \psi_n = E_n \psi_n
+\end{equation}
+
+\noindent The solution of the Schrodinger equation in the infinite well is:
+\begin{equation}
+\label{solution_infinite_well}
+\Psi(x, t) = \sum_{n=1}^{\infty} c_n \phi_n(t) \psi_n(x)
+\end{equation}
+
+\noindent with $\phi_n(t)$ given by:
+\begin{equation}
+\phi_n(t) = \exp \left\lbrace 
+- i E_n t / \hbar
+\right\rbrace
+\end{equation}
+
+
+\section{Expected Value of Momentum in Inifinite Well}
+I am considering the following expectation:
+\begin{equation}
+<p> = \int_{0}^{L} \Psi^{*} \hat{p} \Psi dx
+\end{equation}
+
+\noindent Substituting \eqref{solution_infinite_well} I obtain:
+\begin{eqnarray*}
+<p> &=& \int_{0}^{L} \left(  
+		\sum_{n=1}^{\infty} c_{n}^{*} \phi_{n}^{*}(t) \psi_n(x) 
+	\right) 
+	\left( - i \hbar \frac{\partial}{\partial x} \right)
+	\left(  
+		\sum_{n=1}^{\infty} c_{n} \phi_{n}(t) \psi_n(x) 
+	\right) dx \\
+	&=& -i \hbar \sum_{m, n = 1}^{\infty} c_{m}^{*} c_n  \phi_{m}^{*}(t) \phi_{n}(t) \int_{0}^{L} \psi_{m}(x) \frac{d \psi_n(x)}{dx} dx
+\end{eqnarray*}
+
+\noindent I am working out the following integral $I_{mn}$ now:
+\begin{equation}
+I_{mn} := \int_{0}^{L} \psi_{m}(x) \frac{d \psi_n(x)}{dx} dx
+\end{equation}
+
+\noindent The derivative $d \psi_n / dx$ is:
+\begin{equation}
+\frac{d \psi_n(x)}{dx} = \sqrt{\frac{2}{L}} \frac{\pi n}{L} \cos \left( \frac{\pi n}{L} x \right)
+\end{equation}
+
+\noindent Therefore:
+\begin{equation}
+I_{mn} = \frac{2 \pi n}{L^2} \int_{0}^{L} \sin  \left( \frac{\pi n}{L} x \right) \cos \left( \frac{\pi n}{L} x \right) dx
+\end{equation}
+
+\noindent After change of variables $x \mapsto (\pi n/L)x$ the integral $I_{mn}$ becomes:
+\begin{equation}
+I_{mn} = \frac{2n}{L} \int_0^{\pi} \sin mx \cos nx dx 
+\end{equation}
+
+\noindent Let $T_{mn}$ be: 
+\begin{equation}
+T_{mn} := \int_{0}^{\pi} \sin mx \cos nx dx
+\end{equation}
+
+\noindent It can be shown that $T_{mn}$ (cf. appendix \ref{integral_tmn}) is:
+\begin{equation}
+T_{mn} = \begin{cases} 
+0 & \text{if $ m = n $ or if $ m \equiv n \mod 2 $} \\ 
+\frac{m}{m^2 - n^2} & \text{if $ m \not\equiv n \mod 2 $}
+\end{cases}
+\end{equation}
+
+Consequently, $I_{mn}$ is non zero only when $m \neq n$ and $m \not \equiv n \mod 2$, when it equals:
+\begin{equation}
+I_{mn} = \frac{2 mn L }{m^2 - n^2}
+\end{equation}
+
+
+\section{Matrix Representation of the Momentum Operator $\hat{p}$ in Infinite Potential Well}
+Let $P = [p_{ij}]$ be the matrix representing the momentum operator. The element $p_{ij}$ of the matrix $P$ is given by:
+\begin{equation}
+\label{p_element}
+p_{ij} = \int_{0}^{L} \Psi^{*}_{i} \hat{p} \Psi_j dx
+\end{equation}
+
+Operator $\hat{p}$ applied to $\Psi_j$ is:
+\begin{equation}
+\hat{p} \Psi_j = -i \hbar \frac{\partial \Psi_j}{\partial x} = 
+\end{equation}
+
+
+
+\begin{appendices}
+
+\section{Integral $T_{mn}$}
+\label{integral_tmn}
+In order to calculate the integral $T_{mn}$:
+\begin{equation}
+T_{mn} := \int_{0}^{\pi} \sin mx \cos nx dx
+\end{equation}
+
+\noindent it is necessary to get rid of the product of sine and cosine function of different arguments. 
+\\ \indent Let's consider, however, the case $m=n$ first. It is easy to show that if $m=n$, 
+then $T_{mn} = T_{nn} = 0$.
+\\ \indent Back to the case $m \neq n$ It can be shown\footnote{To derive this use the high school formula $\sin (x+y) = \sin x \cos y + \cos x \sin y$ and its flavor with $-y$ substituted for $y$. 
+}
+ that:
+\begin{equation}
+\sin mx \cos nx = \frac{1}{2} \left( 
+\sin \left((m+n)x\right) + 
+\sin \left( (m-n)x \right)
+\right)
+\end{equation}
+
+Hence, the integral $T_{mn}$ can be rewritten as: 
+\begin{equation}
+T_{mn} = \frac{1}{2} \int_{0}^{\pi} \sin \left((m+n)x\right) dx + 
+\frac{1}{2} \int_{0}^{\pi} \sin \left((m-n)x\right) dx
+\end{equation}
+
+When we calculate this integral, we see that the final value of $T_{mn}$ depends on whether $m$ and $n$
+are of the same parity or not. The final result obtained after a little bit of simple algebra is:
+
+\begin{equation}
+T_{mn} = \begin{cases} 
+0 & \text{if $ m = n $ or if $ m \equiv n \mod 2 $} \\ 
+\frac{m}{m^2 - n^2} & \text{if $ m \not\equiv n \mod 2 $}
+\end{cases}
+\end{equation}
+
+
+\end{appendices}
+
+
+\end{document}
+
+
