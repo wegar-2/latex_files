@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\DeclareMathOperator{\arccot}{arccot}
+
+\begin{document}
+
+
+\noindent Thesis (Leibniz formula for $\pi$):
+
+$$ \sum_{n=0}^{\infty} \frac{(-1)^n}{2n+1} = \frac{\pi}{4} $$
+
+\noindent Take:
+$$ y = \arctan(x) $$
+then:
+$$ y' = \frac{1}{1+x^2} $$
+
+\noindent For $-1 < x < 1$ we have:
+\begin{eqnarray*}
+\frac{1}{1+x^2} &= \displaystyle\frac{1}{1 - (-x^2)} = \displaystyle\sum_{n=0}^{\infty} (-1)^n x^{2n}
+\end{eqnarray*}
+
+\noindent Integrating both sides from $0$ to $u$:
+
+\begin{equation*}
+\int_{0}^{u} \frac{1}{1+x^2} = \arctan(u) = \sum_{n=0}^{\infty} \frac{(-1)^n}{2n+1} u^{2n+1}
+\end{equation*}
+
+\noindent It is clear that the formula above holds for $u \in (-1, 1)$. How about $u=1$?
+Note that the sequence $(a_n)$ given by:
+
+$$
+a_n := \frac{(-1)^n}{2n+1} 
+$$
+is decreasing and bounded. Thus, by monotone convergence theorem the formula holds for $u=1$, too.
+\\ \noindent Consequently, since $\arctan(1) = \pi/2$:
+$$
+\frac{\pi}{2} = \sum_{n=0}^{\infty} \frac{(-1)^n}{2n + 1}
+$$
+\end{document}
