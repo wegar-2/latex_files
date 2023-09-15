@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\DeclareMathOperator{\arccot}{arccot}
+
+\begin{document}
+
+
+\textbf{Thesis}:
+
+$$ I = \int_{0}^{\infty} \frac{\ln x}{1+x^2} dx = \frac{5\pi^5}{64} $$
+
+\textbf{Demonstration}. Use substitution $ u := \ln x$ to proceed:
+\begin{equation*}
+I = \int_{0}^{\infty} \frac{\ln x}{1+x^2} dx = \int_{-\infty}^{0} \frac{u^4 e^u}{1 + e^{2u}} du
+\end{equation*}
+Writing $1/(1+e^{2u})$ as geometric series since $e^u \leq 1$:
+\begin{equation*}
+I = \sum_{n=0}^{\infty} (-1)^n \int_{-\infty}^{0} u^4 e^{(2n+1)u} du
+\end{equation*}
+Substituting $v = -u$ yields:
+\begin{equation*}
+I = \sum_{n=0}^{\infty} (-1)^n \int_{0}^{\infty} v^{(5-1)} e^{-(2n+1)v} dv
+\end{equation*}
+Since for $\lambda > 0$:
+\begin{equation*}
+\int_{0}^{\infty} x^{p-1} e^{-\lambda x} dx = \frac{\Gamma(p)}{\lambda^p}
+\end{equation*}
+
+The integral equals:
+\begin{equation*}
+I = \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)^5} \Gamma(5) = 4! \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)^5}
+\end{equation*}
+
+The formula can be rewritten using Dirichlet's beta function as:
+\begin{equation*}
+I = 4! \beta(5)
+\end{equation*}
+
+It can be proved that the value of Dirichlet beta function at 5 is $5\pi^5 / 1536$, hence:
+\begin{equation*}
+I = 24 \cdot \frac{\pi^5}{1536} = \frac{5\pi^5}{64}
+\end{equation*}
+
+\end{document}
