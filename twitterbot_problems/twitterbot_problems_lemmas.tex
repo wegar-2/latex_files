@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem} % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{exmp}[thm]{Example}
+\begin{document}
+
+\title{List of Lemmas}
+\author{Artur Wegrzyn}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Value of integral $\int_{0}^{\infty} x^{\eta}/(1+x^{\theta})dx$ - formula}
+
+
+\textbf{Thesis}. The following holds for $\eta, \theta >0$ and $\eta+1 < \theta$:
+
+\begin{equation*}
+I = \int_{0}^{\infty} \frac{x^{\eta}}{1+x^{\theta}}dx = \frac{\pi}{\theta \sin \left( \pi \frac{1+\eta}{\theta} \right)}
+\end{equation*}
+
+\textbf{Demonstration}. The key idea - transform the integral into a beta function. Using the substitution $u = x^{\theta}$ to get rid of the 
+the power in the denominator:
+\begin{equation*}
+\int_{0}^{\infty} \frac{x^{\eta}}{1+x^{\theta}}dx = \frac{1}{\theta} \int_{0}^{\infty} \frac{u^{(\eta+1)/\theta-1}}{1+u}dx
+\end{equation*}
+
+Proceeding to obtain $u/(1+u)$, $1/(1+u)$ in the integrand:
+\begin{equation*}
+\frac{1}{\theta} \int_{0}^{\infty} \frac{u^{(\eta+1)/\theta-1}}{1+u}du = 
+\frac{1}{\theta} 
+\int_{0}^{\infty} 
+\left( \frac{u}{1+u} \right)^{{1 - \frac{\eta + 1}{\theta}}} 
+\left( \frac{1}{1+u} \right)^{(3 - \frac{\eta + 1}{\theta}) - 1} du
+\end{equation*}
+
+Moving further towards beta function - using substitution: $v = u/(1+u)$ (remember about changing the limits of integration):
+\begin{eqnarray*}
+\frac{1}{\theta} 
+\int_{0}^{\infty} 
+\left( \frac{u}{1+u} \right)^{{1 - \frac{\eta + 1}{\theta}}} 
+\left( \frac{1}{1+u} \right)^{(3 - \frac{\eta + 1}{\theta}) - 1} du &=& 
+\frac{1}{\theta} 
+\int_{0}^{1} 
+v^{\frac{\eta + 1}{\theta} - 1} 
+\left( 1-v \right)^{
+	(1 - \frac{\eta + 1}{\theta}) - 1
+} du \\ &=& 
+\frac{1}{\theta} B(\frac{\eta + 1}{\theta}, 1 - \frac{\eta + 1}{\theta})
+\end{eqnarray*}
+
+Thus, by the basic property of the beta function:
+\begin{eqnarray*}
+I = \frac{1}{\theta} B(1 - \frac{\eta + 1}{\theta}, 1 - \frac{\eta + 1}{\theta}) &=& 
+\frac{1}{\beta} \frac{\Gamma(\frac{\eta + 1}{\theta})\Gamma(1 - \frac{\eta + 1}{\theta})}{\Gamma(1)} 
+\end{eqnarray*}
+
+The Euler reflection formula states that for $z \notin \mathbb{Z}$:
+$$ 
+\Gamma(x) \Gamma(1-x) = \frac{\pi}{\sin (\pi x)}
+$$
+
+This can be appied in the case at hand (since by assumption $\eta + 1 < \theta$) to obtain:
+$$
+I = \frac{\pi}{\theta} \frac{1}{\sin (\frac{1+\eta}{\theta} \pi)}
+$$
+
+\end{document}
