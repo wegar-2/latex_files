@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+
+%%\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+
+
+\begin{document}
+
+\title{Econometric Notes I: Simple Linear Regression}
+\author{Artur Wegrzyn}
+\maketitle
+
+\abstract{Notes on all things econometrics}
+
+\tableofcontents
+
+
+\section{Introduction}
+
+Consider the standard model:
+\begin{equation}
+Y_t = a x_t + b +\epsilon_t
+\end{equation}
+where available sample is indexed by $t \in {1, 2, \dots, T}$.
+Let ${(x_1, y_1), (x_2, y_2), \dots, (x_T, y_T)}$ be the dataset s.t.:
+\begin{equation}
+y_t = a x_t + b + e_t
+\end{equation}
+
+Minimization of the residual sum of squares:
+\begin{equation}
+RSS = \sum_{t=1}^{T} e_t^2 = \sum_{t=1}^{T}(y_t - a x_t - b)^2
+\end{equation}
+
+\section{Derivation of OLS Estimators}
+Partial derivatives of $RSS$:
+\begin{equation}
+\frac{\partial RSS}{\partial a} = 
+\end{equation}
+
+Imposing first-order conditions yields and switching to hats (OLS estimators satisfy the FOCs):
+
+
+\section{Select Properties of Estimators}
+
+
+\section{References}
+The best reference on all things time-series is obviously \cite{hamilton_tsa}. 
+
+
+\bibliography{tsa_bibliography}
+\bibliographystyle{ieeetr}
+
+\end{document}
